@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//criar uma migration: npx prisma migrate dev --name nome-da-migration
+model User {
+  id        String    @id @default(uuid())
+  firstname String
+  surname   String
+  email     String
+  password  String
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  @@map("users")
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String
+  use_in_menu Boolean?  @default(false)
+  create_at   DateTime? @default(now())
+  update_at   DateTime? @default(now())
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id                  String    @id @default(uuid())
+  enabled             Boolean?  @default(true)
+  name                String
+  slug                String
+  use_in_menu         Boolean?  @default(false)
+  stock               Int?      @default(0)
+  description         String
+  price               Float
+  price_with_discount Float
+  create_at           DateTime? @default(now())
+  update_at           DateTime? @default(now())
+
+  category    Category @relation(fields: [category_id], references: [id])
+  category_id String
+
+  productImages ProductImg[]
+
+  @@map("products")
+}
+
+model ProductImg {
+  id        String    @id @default(uuid())
+  enabled   Boolean?  @default(true)
+  path      String
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@map("productsImg")
+}
