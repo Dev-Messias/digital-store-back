@@ -9,6 +9,7 @@ import { DeleteUserController } from './controllers/user/DeleteUserController';
 
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 import { ListCategoryController } from './controllers/category/ListCategoryController';
+import { UpdateCategoryController } from './controllers/category/UpdateCategoryController';
 
 import { CreateProductController } from './controllers/product/CreateProductController';
 import { CreateProductImgController } from './controllers/productImg/CreateProductImgController';
@@ -32,6 +33,7 @@ router.delete('/user', isAuthenticate, new DeleteUserController().handle)
 //-- ROTAS CATEGORY --
 router.post('/category', isAuthenticate, new CreateCategoryController().handle)
 router.get('/category', new ListCategoryController().handle);
+router.put('/category-up', isAuthenticate, new UpdateCategoryController().handle)
 
 //-- ROTAS PRODUCT --
 router.post('/product', isAuthenticate, new CreateProductController().handle)

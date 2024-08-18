@@ -7,6 +7,7 @@ class ListCategorySerevice{
             select:{
                 id: true,
                 name: true,
+                use_in_menu: true
             }
         })
 
