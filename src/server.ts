@@ -1,6 +1,7 @@
 import express, {Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import path from 'path';
 
 //importando as rotas
 import { router } from './routes';
@@ -16,6 +17,10 @@ app.use(cors())
 //utilizar todas as rotas do arquivo rotas
 app.use(router);
 
+app.use(
+    '/files',
+    express.static(path.resolve(__dirname, '..', 'tmp'))
+)
 //tratando error
 app.use((err: Error, req: Request, res:Response, next: NextFunction)=>{
     //verificando se o que esta passando na rota é do tipo erro
