@@ -8,6 +8,7 @@ import { CreateCategoryController } from './controllers/category/CreateCategoryC
 import { ListCategoryController } from './controllers/category/ListCategoryController';
 import { CreateProductController } from './controllers/product/CreateProductController';
 import { CreateProductImgController } from './controllers/productImg/CreateProductImgController';
+import { ListByCategoryController } from './controllers/product/ListByCategoryController';
 
 import { isAuthenticate } from './middlewares/isAuthenticate';
 
@@ -28,6 +29,7 @@ router.get('/category', new ListCategoryController().handle);
 
 //-- ROTAS PRODUCT --
 router.post('/product', isAuthenticate, new CreateProductController().handle)
+router.get('/category/product', new ListByCategoryController().handle)
 
 //-- ROTAS PRODUCTIMG --
 router.post('/product-img', isAuthenticate, upload.single('file'), new CreateProductImgController().handle)
