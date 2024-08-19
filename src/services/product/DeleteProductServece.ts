@@ -19,7 +19,7 @@ class DeleteProductService{
 
             //se não exitir o produto
             if(!productAlreadyExists){
-                throw new Error("User not exists!");   
+                throw new Error("product not exists!");   
             }
 
             await prismaClient.product.delete({
