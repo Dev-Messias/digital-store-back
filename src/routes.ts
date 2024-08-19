@@ -14,10 +14,12 @@ import { UpdateCategoryController } from './controllers/category/UpdateCategoryC
 import { CreateProductController } from './controllers/product/CreateProductController';
 import { CreateProductImgController } from './controllers/productImg/CreateProductImgController';
 import { ListByCategoryController } from './controllers/product/ListByCategoryController';
+import { UpdateProductController } from './controllers/product/UpdateProductController';
 
 import { isAuthenticate } from './middlewares/isAuthenticate';
 
 import uploadConfig from './config/multer';
+
 
 const router = Router();
 
@@ -38,6 +40,7 @@ router.put('/category-up', isAuthenticate, new UpdateCategoryController().handle
 //-- ROTAS PRODUCT --
 router.post('/product', isAuthenticate, new CreateProductController().handle)
 router.get('/category/product', new ListByCategoryController().handle)
+router.put('/product', isAuthenticate, new UpdateProductController().handle)
 
 //-- ROTAS PRODUCTIMG --
 router.post('/product-img', isAuthenticate, upload.single('file'), new CreateProductImgController().handle)

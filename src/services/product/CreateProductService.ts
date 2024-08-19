@@ -16,7 +16,7 @@ interface ProductRequest{
 class CreateProductService{
     async execute({enabled, name, slug, use_in_menu, stock, description, price, price_with_discount, category_id}: ProductRequest){
          //verificando se esta vazio
-        if(name === '' && slug === '' && price === null && price_with_discount === null ){
+        if(name === '' || slug === '' || price === null || price_with_discount === null ){
             throw new Error('input invalid')
             
             
