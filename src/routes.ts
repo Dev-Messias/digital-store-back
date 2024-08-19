@@ -16,10 +16,12 @@ import { CreateProductImgController } from './controllers/productImg/CreateProdu
 import { ListByCategoryController } from './controllers/product/ListByCategoryController';
 import { UpdateProductController } from './controllers/product/UpdateProductController';
 import { DetailProductController } from './controllers/product/DetailProductController';
+import { DeleteProductController } from './controllers/product/DeleteProductController';
 
 import { isAuthenticate } from './middlewares/isAuthenticate';
 
 import uploadConfig from './config/multer';
+
 
 
 
@@ -44,6 +46,7 @@ router.post('/product', isAuthenticate, new CreateProductController().handle)
 router.get('/category/product', new ListByCategoryController().handle)
 router.put('/product', isAuthenticate, new UpdateProductController().handle)
 router.get('/product-detail', new DetailProductController().handle)
+router.delete('/product-delete', isAuthenticate, new DeleteProductController().handle)
 
 //-- ROTAS PRODUCTIMG --
 router.post('/product-img', isAuthenticate, upload.single('file'), new CreateProductImgController().handle)
